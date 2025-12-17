@@ -53,8 +53,13 @@ app.all("/", (req, res) => {
     isLogin: req.isLogin,
   });
 });
-
+//departments
 app.use("/departments", require("./src/routes/department.router"));
+
+//personnels
+app.use("/personnels", require("./src/routes/personnel.router"));
+
+//not found routes
 
 app.all("*", async (req, res) => {
   res.status(404).send({

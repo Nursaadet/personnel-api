@@ -47,8 +47,6 @@ const PersonnelSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      // minlength: 10,
-      // match: /^[0-9]+$/
     },
 
     email: {
