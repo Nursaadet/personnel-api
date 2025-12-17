@@ -9,17 +9,26 @@
 */
 
 const express = require('express')
+const { dbConnection } = require("./src/configs/dbConnection");
 const app = express()
 
 /* ------------------------------------------------------- */
 
 
 
-// continue from here...
+// envVariables to process.env:
+require("dotenv").config();
+const PORT = process.env?.PORT || 8000;
 
 
+
+// asyncErrors to errorHandler:
+require("express-async-errors");
+
+app.use("/departments", require("./src/routes/department.router"));
 
 /* ------------------------------------------------------- */
+dbConnection();
 
 // errorHandler:
 app.use(require('./src/middlewares/errorHandler'))
