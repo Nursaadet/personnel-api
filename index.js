@@ -9,7 +9,7 @@
 */
 
 const express = require("express");
-const { dbConnection } = require("./src/configs/dbConnection");
+const { dbConnection, mongoose } = require("./src/configs/dbConnection");
 const app = express();
 
 /* ------------------------------------------------------- */
@@ -77,3 +77,10 @@ app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
 // require('./src/helpers/sync')()
+
+if (process.env.NODE_ENV == "development") {
+  return;
+  require("./src/helpers/dataCreate")()
+    .then((res) => console.log("Data synched"))
+    .catch((err) => console.error("Data could not synched"));
+}

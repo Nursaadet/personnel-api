@@ -20,7 +20,7 @@ const departments = [
 ];
 const personnels = [
   {
-	departmentId: "66952d66e1b780e7b49e8111",
+    departmentId: "66952d66e1b780e7b49e8111",
     username: "jdoe",
     password: "test1",
     firstName: "John",
@@ -157,13 +157,14 @@ const personnels = [
 ];
 const Personnel = require("../models/personnel.model");
 const Department = require("../models/department.model");
+const { mongoose } = require("../configs/dbConnection");
 
 async function dataCreate() {
   // await mongoose.connection.dropDatabase()
-  await Department.deleteMany({});
+  await Department.deleteMany();
   await Department.insertMany(departments);
 
-  await Personnel.deleteMany({});
+  await Personnel.deleteMany();
   let isFirstAccount = (await Personnel.countDocuments()) === 0;
   // await Personnel.insertMany( personnels )
   for (const personnel of personnels) {
