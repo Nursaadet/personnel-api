@@ -25,43 +25,45 @@ const options = {
 };
 /* ------------------------------------------------------- */
 // const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0', language: 'tr-TR' })
-const swaggerAutogen = require('swagger-autogen')()
+const swaggerAutogen = require("swagger-autogen")();
 
-const packageJson = require('./package.json')
+const packageJson = require("./package.json");
 
 const document = {
-    // info: {
-    //     version: '1.0.0',
-    //     title: 'Personnel API',
-    //     description: 'Personnel Management System API Service v.1',
-    //     termOfService: 'http://127.0.0.1:8000/#',
-    //     contact: { name: 'Saadet', email: 'saadet@dfghjk.com' },
-    //     license: { name: 'Apache Licence' }
-    // },
-    info: {
-        version: packageJson.version,
-        title: packageJson.name,
-        description: packageJson.description,
-        // termOfService: 'http://127.0.0.1:8000/#',
-        contact: { name: packageJson.author, email: 'saadet@dfghjk.com' },
-        license: { name: packageJson.license }
+  // info: {
+  //     version: '1.0.0',
+  //     title: 'Personnel API',
+  //     description: 'Personnel Management System API Service v.1',
+  //     termOfService: 'http://127.0.0.1:8000/#',
+  //     contact: { name: 'Saadet', email: 'saadet@dfghjk.com' },
+  //     license: { name: 'Apache Licence' }
+  // },
+  info: {
+    version: packageJson.version,
+    title: packageJson.name,
+    description: packageJson.description,
+    // termOfService: 'http://127.0.0.1:8000/#',
+    contact: { name: packageJson.author, email: "saadet@dfghjk.com" },
+    license: { name: packageJson.license },
+  },
+  host: `${HOST}:${PORT}`,
+  basePath: "/",
+  schemes: ["http", "https"],
+  // SimpleToken Settings:
+  securityDefinitions: {
+    Token: {
+      type: "apiKey",
+      in: "header",
+      name: "Authorization",
+      description:
+        "Simple Token Authentication * Example: <b>Token ...tokenKey...</b>",
     },
-    host: `${HOST}:${PORT}`,
-    basePath: '/',
-    schemes: ['http', 'https'],
-    // SimpleToken Settings:
-    securityDefinitions: {
-        Token: {
-            type: 'apiKey',
-            in: 'header',
-            name: 'Authorization',
-			description: 'Simple Token Authentication * Example: <b>Token ...tokenKey...</b>'
-        }
-    },
-    security: [
-        { Token: [] }
-    ],
-    definitions: {
-        
-    }
-}
+  },
+  security: [{ Token: [] }],
+  definitions: {},
+};
+const routes = ["./index.js"];
+const outputFile = "./swagger.json";
+
+// RUN:
+swaggerAutogen(outputFile, routes, document);
