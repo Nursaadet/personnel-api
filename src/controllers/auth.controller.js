@@ -13,11 +13,37 @@ module.exports = {
   login: async (req, res) => {
     const { username, password } = req.body;
 
-    if (username & password) {
+    if (username && password) {
       const user = await Personnel.findOne({ username });
 
       if (user && user.password == passwordEncrypt(password)) {
+          if (user.isActive) {
+            /* TOKEN */
+            
+                    // Token var mı?
+                    let tokenData = await Token.findOne({ userId: user._id })
+
+                    // Token yoksa oluştur:
+                    if (!tokenData) {
+                        tokenData = await Token.create({
+                            userId: user._id,
+                            token: passwordEncrypt(user._id + Date.now())
+                        })
+                    }
+
+                    res.status(200).send({
+                        error: false,
+                        token: tokenData.token,
+                        user
+                    })
+
+            /* TOKEN */
+          } else {
+            res.errorStatusCode = 401;
+            throw new Error("This user is not active.");
+          }
       } else {
+
         res.errorStatusCode = 401;
         throw new Error("Wrong username or password.");
       }
