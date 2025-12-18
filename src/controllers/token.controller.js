@@ -2,6 +2,13 @@
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
+
+// Simple Token
+// Token Authentication
+// Basic Token
+// Token
+
+
 const Token = require("../models/token.model");
 
 module.exports = {
