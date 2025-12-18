@@ -47,7 +47,7 @@ app.use(
 // npm i morgan
 // https://expressjs.com/en/resources/middleware/morgan.html
 
-const morgan = require('morgan')
+const morgan = require("morgan");
 
 // app.use(morgan('tiny'))
 // app.use(morgan('short'))
@@ -58,14 +58,26 @@ const morgan = require('morgan')
 // app.use(morgan('TIME=":date[iso]" - URL=":url" - Method=":method" - IP=":remote-addr" - Ref=":referrer" - Status=":status" - Sign=":user-agent" (:response-time[digits] ms)'))
 
 // Write to File:
-const fs = require('node:fs')
-app.use(morgan('combined', {
-    stream: fs.createWriteStream('./access.log', { flags: 'a+' })
-}))
-/* ------------------------------------------------------- */
+// const fs = require('node:fs')
+// app.use(morgan('combined', {
+//   stream: fs.createWriteStream('./access.log', { flags: 'a+' })
+// }))
+// Write to File - Day by day:
+const fs = require("node:fs");
 
+const now = new Date();
+// console.log(now, typeof now)
+const today = now.toISOString().split("T")[0];
+// console.log(today, typeof today)
+/* ------------------------------------------------------- */
+app.use(
+  morgan("combined", {
+    stream: fs.createWriteStream(`./logs/${today}.log`, { flags: "a+" }),
+  })
+);
+/* ------------------------------------------------------- */
 // Authentication Middleware:
-app.use(require('./src/middlewares/authentication'))
+app.use(require("./src/middlewares/authentication"));
 
 // res.getModelList():
 app.use(require("./src/middlewares/findSearchSortPage"));
@@ -77,7 +89,7 @@ app.all("/", (req, res) => {
     message: "Welcome to PERSONNEL API",
     // session: req.session,
     // isLogin: req.isLogin,
-    user: req.user
+    user: req.user,
   });
 });
 // /auth
