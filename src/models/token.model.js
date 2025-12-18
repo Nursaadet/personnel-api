@@ -3,8 +3,14 @@
     EXPRESS - Personnel API
 ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
-/* ------------------------------------------------------- */
 
+
+/* ------------------------------------------------------- *
+{
+    "userId": "66a13e516d7779078d0458e8",
+    "token": "random-chars-to-here"
+}
+/* ------------------------------------------------------- */
 // Token Model:
 
 const TokenSchema = new mongoose.Schema({

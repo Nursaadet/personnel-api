@@ -3,24 +3,31 @@
     EXPRESS - Personnel API
 ------------------------------------------------------- */
 
-const Personnel = require('../models/personnel.model')
-
-const passwordEncrypt = require('../helpers/passwordEncrypt')
+const Personnel = require("../models/personnel.model");
+const Token = require("../models/token.model");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 /* ------------------------------------------------------- */
 
 module.exports = {
+  login: async (req, res) => {
+    const { username, password } = req.body;
 
-    login: async (req, res) => {
+    if (username & password) {
+      const user = await Personnel.findOne({ username });
 
-    },
-
-    logout: async (req, res) => {
-
-
+      if (user && user.password == passwordEncrypt(password)) {
+      } else {
+        res.errorStatusCode = 401;
+        throw new Error("Wrong username or password.");
+      }
+    } else {
+      res.errorStatusCode = 401;
+      throw new Error("Please enter username and password.");
     }
+  },
 
-}
-
+  logout: async (req, res) => {},
+};
 
 /* ------------------------------------------------------- */
