@@ -17,33 +17,30 @@ module.exports = {
       const user = await Personnel.findOne({ username });
 
       if (user && user.password == passwordEncrypt(password)) {
-          if (user.isActive) {
-            /* TOKEN */
-            
-                    // Token var mı?
-                    let tokenData = await Token.findOne({ userId: user._id })
+        if (user.isActive) {
+          /* TOKEN */
 
-                    // Token yoksa oluştur:
-                    if (!tokenData) {
-                        tokenData = await Token.create({
-                            userId: user._id,
-                            token: passwordEncrypt(user._id + Date.now())
-                        })
-                    }
+          // Token var mı?
+          let tokenData = await Token.findOne({ userId: user._id });
 
-                    res.status(200).send({
-                        error: false,
-                        token: tokenData.token,
-                        user
-                    })
-
-            /* TOKEN */
-          } else {
-            res.errorStatusCode = 401;
-            throw new Error("This user is not active.");
+          // Token yoksa oluştur:
+          if (!tokenData) {
+            tokenData = await Token.create({
+              userId: user._id,
+              token: passwordEncrypt(user._id + Date.now()),
+            });
           }
+          /* TOKEN */
+          res.status(200).send({
+            error: false,
+            token: tokenData.token,
+            user,
+          });
+        } else {
+          res.errorStatusCode = 401;
+          throw new Error("This user is not active.");
+        }
       } else {
-
         res.errorStatusCode = 401;
         throw new Error("Wrong username or password.");
       }
