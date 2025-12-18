@@ -75,6 +75,14 @@ app.use(
     stream: fs.createWriteStream(`./logs/${today}.log`, { flags: "a+" }),
   })
 );
+
+/* ------------------------------------------------------- */
+// DOCUMENTATION:
+// $ npm i swagger-autogen # JSON creator
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
+
+
 /* ------------------------------------------------------- */
 // Morgan Logger:
 app.use(require("./src/middlewares/logger"));
