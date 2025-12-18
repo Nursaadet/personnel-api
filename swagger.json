@@ -14,10 +14,7 @@
   },
   "host": "http://127.0.0.1:8000",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "securityDefinitions": {
     "Token": {
       "type": "apiKey",
@@ -47,6 +44,16 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -500,10 +507,7 @@
             },
             "validate": {
               "type": "array",
-              "example": [
-                null,
-                "Email is not valid"
-              ],
+              "example": [null, "Email is not valid"],
               "items": {
                 "type": "string"
               }
@@ -595,7 +599,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1721935222324
+              "example": 1721935979129
             }
           }
         }
