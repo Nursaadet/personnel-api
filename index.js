@@ -41,7 +41,7 @@ app.use(
   })
 );
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 // LOGGER
 
 // npm i morgan
@@ -76,6 +76,9 @@ app.use(
   })
 );
 /* ------------------------------------------------------- */
+// Morgan Logger:
+app.use(require("./src/middlewares/logger"));
+
 // Authentication Middleware:
 app.use(require("./src/middlewares/authentication"));
 
