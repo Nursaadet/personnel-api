@@ -6,6 +6,7 @@
 
 module.exports = (req, res, next) => {
   // Searching & Sorting & Pagination:
+  const filter = req.query?.filter || {};
 
   // SEARCHING: URL?search[key1]=value1&search[key2]=value2
   const search = req.query?.search || {};
@@ -27,8 +28,13 @@ module.exports = (req, res, next) => {
   skip = skip > 0 ? skip : page * limit;
 
   // Run SearchingSortingPagination engine for Model:
-  res.getModelList = async function (Model, populate = null) {
-    return await Model.find(search)
+  res.getModelList = async function (
+    Model,
+    customFilters = {},
+    populate = null
+  ) {
+    const filtersAndSearch = { ...customFilters, ...filter, ...search };
+    return await Model.find(filtersAndSearch)
       .sort(sort)
       .skip(skip)
       .limit(limit)
@@ -36,8 +42,9 @@ module.exports = (req, res, next) => {
   };
 
   // Details:
-  res.getModelListDetails = async function (Model) {
-    const data = await Model.find(search);
+  res.getModelListDetails = async function (Model, customFilters = {}) {
+    const filtersAndSearch = { ...customFilters, ...filter, ...search };
+    const data = await Model.find(filtersAndSearch);
     let details = {
       search,
       sort,
