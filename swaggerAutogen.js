@@ -60,7 +60,12 @@ const document = {
     },
   },
   security: [{ Token: [] }],
-  definitions: {},
+  // Model Definitions:
+    definitions: {
+
+        "Department": require('./src/models/department.model').schema.obj,
+        "Personnel": require('./src/models/personnel.model').schema.obj,
+    }
 };
 const routes = ["./index.js"];
 const outputFile = "./swagger.json";
