@@ -4,8 +4,6 @@
 ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
 /* ------------------------------------------------------- */
-const { mongoose } = require("../configs/dbConnection");
-/* ------------------------------------------------------- */
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 // const uniqueValidator = require("mongoose-unique-validator");
 

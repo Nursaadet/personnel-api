@@ -40,6 +40,8 @@ app.use(
     //   }
   })
 );
+// Authentication Middleware:
+app.use(require('./src/middlewares/authentication'))
 
 // res.getModelList():
 app.use(require("./src/middlewares/findSearchSortPage"));
@@ -49,8 +51,9 @@ app.all("/", (req, res) => {
   res.send({
     error: false,
     message: "Welcome to PERSONNEL API",
-    session: req.session,
-    isLogin: req.isLogin,
+    // session: req.session,
+    // isLogin: req.isLogin,
+    user: req.user
   });
 });
 // /auth

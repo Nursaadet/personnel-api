@@ -54,6 +54,13 @@ module.exports = {
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,
       data,
+      
     });
   },
+  personnels: async (req, res) => {
+    res.status(200).send({
+      error: false,
+      message: "Personnels by department"
+    })
+  }
 };
