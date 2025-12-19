@@ -66,7 +66,10 @@ app.use(
 /* ------------------------------------------------------- */
 // REDOC:
 const redoc = require("redoc-express");
-app.use("/documents/redoc", redoc({ specUrl: "/documents/json" }));
+app.use(
+  "/documents/redoc",
+  redoc({ specUrl: "/documents/json", title: "Redoc UI" })
+);
 
 // Morgan Logger:
 app.use(require("./src/middlewares/logger"));
