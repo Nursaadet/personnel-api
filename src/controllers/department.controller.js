@@ -27,6 +27,17 @@ module.exports = {
   },
 
   create: async (req, res) => {
+    /*
+        #swagger.tags = ["Departments"]
+        #swagger.summary = "Create Department"
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+                $ref: '#/definitions/Department'
+            }
+        }
+    */
     const data = await Department.create(req.body);
     res.status(201).send({
       error: false,
