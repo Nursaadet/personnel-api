@@ -26,19 +26,26 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Login with username and password",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "*String"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "*String"
                 }
               }
             }
@@ -53,7 +60,11 @@
     },
     "/auth/logout": {
       "get": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "Delete token.",
         "responses": {
           "200": {
             "description": "OK"
@@ -599,7 +610,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1721935979129
+              "example": 1721936688261
             }
           }
         }
