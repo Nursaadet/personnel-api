@@ -12,7 +12,7 @@
       "name": "ISC"
     }
   },
-  "host": "http://127.0.0.1:8000",
+  "host": "127.0.0.1:8000",
   "basePath": "/",
   "schemes": ["http", "https"],
   "securityDefinitions": {
@@ -584,7 +584,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1721937840777
+              "example": 1721937959668
             }
           }
         }
