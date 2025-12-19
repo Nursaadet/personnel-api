@@ -64,6 +64,11 @@ module.exports = {
   },
 
   logout: async (req, res) => {
+     /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'Logout'
+            #swagger.description = 'Delete token.'
+        */
     // Token Delete:
         // if (req.user) {
         //    const data = await Token.deleteOne({ userId: req.user._id })
