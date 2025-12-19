@@ -48,16 +48,26 @@ app.use(
 // $ npm i redoc-express
 
 // JSON:
-app.use('/documents/json', (req, res) => {
-    res.sendFile('swagger.json', { root: '.' })
-})
+app.use("/documents/json", (req, res) => {
+  res.sendFile("swagger.json", { root: "." });
+});
 
 // SWAGGER:
-const swaggerUi = require('swagger-ui-express')
-const swaggerJson = require('./swagger.json')
+const swaggerUi = require("swagger-ui-express");
+const swaggerJson = require("./swagger.json");
 
-app.use('/documents/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }))
+app.use(
+  "/documents/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJson, {
+    swaggerOptions: { persistAuthorization: true },
+  })
+);
 /* ------------------------------------------------------- */
+// REDOC:
+const redoc = require("redoc-express");
+app.use("/documents/redoc", redoc({ specUrl: "/documents/json" }));
+
 // Morgan Logger:
 app.use(require("./src/middlewares/logger"));
 
