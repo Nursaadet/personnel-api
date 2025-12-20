@@ -6,7 +6,6 @@
 
 module.exports = (req, res, next) => {
   // Searching & Sorting & Pagination:
-  const filter = req.query?.filter || {};
 
   // SEARCHING: URL?search[key1]=value1&search[key2]=value2
   const search = req.query?.search || {};

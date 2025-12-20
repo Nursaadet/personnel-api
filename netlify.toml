@@ -1,0 +1,9 @@
+[build]
+  functions = "src"
+  publish = "public"
+[functions]
+  external_node_modules = ["express", "mongoose"]
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/index"
+  status = 200

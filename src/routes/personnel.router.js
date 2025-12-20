@@ -4,15 +4,14 @@
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
+
 const personnel = require("../controllers/personnel.controller");
-const permissions = require("../middlewares/permissions");
 
 // URL: /personnels
-//http://localhost:8000/personnels/login
-// router.post("/login", personnel.login);
-// router.all("/logout", personnel.logout);
 
-router.use(permissions.isAdmin);
+// Login/logout:
+router.post("/login", personnel.login);
+router.all("/logout", personnel.logout);
 
 router.route("/").get(personnel.list).post(personnel.create);
 
@@ -22,5 +21,6 @@ router
   .put(personnel.update)
   .patch(personnel.update)
   .delete(personnel.delete);
+
 /* ------------------------------------------------------- */
 module.exports = router;
